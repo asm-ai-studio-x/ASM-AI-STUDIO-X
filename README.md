@@ -1,16 +1,20 @@
-## Hi there 👋
+# ASM-AI-STUDIO-X
 
-<!--
-**asm-ai-studio-x/ASM-AI-STUDIO-X** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+ASM-AI-STUDIO-X is a comprehensive project designed to facilitate Artificial Intelligence and Machine Learning applications.
 
-Here are some ideas to get you started:
+## Project Structure
+- `src/`: Contains all source code modules.
+- `config/`: Holds configuration files needed for the application.
+- `main.py`: The main orchestrator to run the application.
+- `requirements.txt`: Lists the dependencies required to run the project.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Getting Started
+1. Clone this repository.
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the main orchestrator:
+   ```bash
+   python main.py
+   ```
