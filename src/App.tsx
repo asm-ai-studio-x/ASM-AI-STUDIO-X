@@ -209,20 +209,20 @@ const App: React.FC = () => {
             <form onSubmit={handlePredict} className="space-y-6">
               <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Square Footage</label>
-                  <input type="number" placeholder="e.g. 2400" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                  <label htmlFor="sqft" className="text-sm font-medium text-slate-700">Square Footage</label>
+                  <input id="sqft" type="number" placeholder="e.g. 2400" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Neighborhood (Rank 1-10)</label>
-                  <input type="number" min="1" max="10" placeholder="e.g. 8" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                  <label htmlFor="neighborhood" className="text-sm font-medium text-slate-700">Neighborhood (Rank 1-10)</label>
+                  <input id="neighborhood" type="number" min="1" max="10" placeholder="e.g. 8" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Property Age (Years)</label>
-                  <input type="number" placeholder="e.g. 15" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                  <label htmlFor="age" className="text-sm font-medium text-slate-700">Property Age (Years)</label>
+                  <input id="age" type="number" placeholder="e.g. 15" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700">Renovation Grade (1-5)</label>
-                  <input type="number" min="1" max="5" placeholder="e.g. 4" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                  <label htmlFor="renovation" className="text-sm font-medium text-slate-700">Renovation Grade (1-5)</label>
+                  <input id="renovation" type="number" min="1" max="5" placeholder="e.g. 4" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
                 </div>
               </div>
               <button type="submit" className="w-full bg-slate-900 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors shadow-lg">
