@@ -36,15 +36,31 @@ const featureImportance = [
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
+type Tab = 'dashboard' | 'pipeline' | 'marketing';
+
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [prediction, setPrediction] = useState<number | null>(null);
   const [marketingContent, setMarketingContent] = useState<string>('');
 
+  // Pipeline inputs
+  const [sqft, setSqft] = useState<string>('');
+  const [neighborhood, setNeighborhood] = useState<string>('');
+  const [age, setAge] = useState<string>('');
+  const [renovation, setRenovation] = useState<string>('');
+
   const handlePredict = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate prediction logic from Python script
-    const mockPrice = 450000 + Math.random() * 50000;
+
+    const sqftVal = parseFloat(sqft) || 2000;
+    const neighborhoodVal = parseFloat(neighborhood) || 5;
+    const ageVal = parseFloat(age) || 10;
+    const renovationVal = parseFloat(renovation) || 3;
+
+    // A slightly more realistic "mock" prediction logic
+    // Price = base + (sqft * 200) + (neighborhood * 10000) - (age * 1000) + (renovation * 5000)
+    const mockPrice = 100000 + (sqftVal * 150) + (neighborhoodVal * 15000) - (ageVal * 500) + (renovationVal * 8000);
+
     setPrediction(mockPrice);
     setMarketingContent(`This property is predicted to be valued at $${mockPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}.`);
   };
@@ -163,9 +179,9 @@ const App: React.FC = () => {
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                       <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
                       <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} tickFormatter={(val) => `$${val/1000}k`} />
-                      <Tooltip 
+                      <Tooltip
                         contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'}}
-                        formatter={(val: any) => [`$${val.toLocaleString()}`, '']}
+                        formatter={(val: number) => [`$${val.toLocaleString()}`, '']}
                       />
                       <Legend verticalAlign="top" align="right" height={36} iconType="circle" />
                       <Line type="monotone" dataKey="price" name="Actual Price" stroke="#2563eb" strokeWidth={3} dot={{r: 4, fill: '#2563eb'}} activeDot={{r: 6}} />
@@ -210,19 +226,19 @@ const App: React.FC = () => {
               <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="sqft" className="text-sm font-medium text-slate-700">Square Footage</label>
-                  <input id="sqft" type="number" placeholder="e.g. 2400" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                  <input id="sqft" type="number" placeholder="e.g. 2400" value={sqft} onChange={(e) => setSqft(e.target.value)} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="neighborhood" className="text-sm font-medium text-slate-700">Neighborhood (Rank 1-10)</label>
-                  <input id="neighborhood" type="number" min="1" max="10" placeholder="e.g. 8" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                  <input id="neighborhood" type="number" min="1" max="10" placeholder="e.g. 8" value={neighborhood} onChange={(e) => setNeighborhood(e.target.value)} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="age" className="text-sm font-medium text-slate-700">Property Age (Years)</label>
-                  <input id="age" type="number" placeholder="e.g. 15" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                  <input id="age" type="number" placeholder="e.g. 15" value={age} onChange={(e) => setAge(e.target.value)} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="renovation" className="text-sm font-medium text-slate-700">Renovation Grade (1-5)</label>
-                  <input id="renovation" type="number" min="1" max="5" placeholder="e.g. 4" className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                  <input id="renovation" type="number" min="1" max="5" placeholder="e.g. 4" value={renovation} onChange={(e) => setRenovation(e.target.value)} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
                 </div>
               </div>
               <button type="submit" className="w-full bg-slate-900 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors shadow-lg">
